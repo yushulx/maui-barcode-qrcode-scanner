@@ -58,4 +58,13 @@
 	  <PackageReference Include="SkiaSharp.Views" Version="2.88.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="CameraPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PicturePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
