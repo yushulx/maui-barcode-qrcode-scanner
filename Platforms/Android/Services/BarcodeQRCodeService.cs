@@ -1,15 +1,7 @@
-﻿using BarcodeQrScanner.Platforms.Android.Services;
-using Com.Dynamsoft.Dbr;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BarcodeQrScanner.Services;
+﻿using Com.Dynamsoft.Dbr;
 using SkiaSharp;
 
-[assembly: Dependency(typeof(BarcodeQRCodeService))]
-namespace BarcodeQrScanner.Platforms.Android.Services
+namespace BarcodeQrScanner.Services
 {
     public class DBRLicenseVerificationListener : Java.Lang.Object, IDBRLicenseVerificationListener
     {
@@ -22,20 +14,17 @@ namespace BarcodeQrScanner.Platforms.Android.Services
         }
     }
 
-    public class BarcodeQRCodeService : IBarcodeQRCodeService
+    public partial class BarcodeQRCodeService
     {
         BarcodeReader reader;
 
-        Task<int> IBarcodeQRCodeService.InitSDK(string license)
+        public partial void InitSDK(string license)
         {
             BarcodeReader.InitLicense(license, new DBRLicenseVerificationListener());
             reader = new BarcodeReader();
-            TaskCompletionSource<int> taskCompletionSource = new TaskCompletionSource<int>();
-            taskCompletionSource.SetResult(0);
-            return taskCompletionSource.Task;
         }
 
-        Task<BarcodeQrData[]> IBarcodeQRCodeService.DecodeFile(string filePath)
+        public partial BarcodeQrData[] DecodeFile(string filePath)
         {
             BarcodeQrData[] output = null;
             try
@@ -71,9 +60,7 @@ namespace BarcodeQrScanner.Platforms.Android.Services
             {
             }
 
-            TaskCompletionSource<BarcodeQrData[]> taskCompletionSource = new TaskCompletionSource<BarcodeQrData[]>();
-            taskCompletionSource.SetResult(output);
-            return taskCompletionSource.Task;
+            return output;
         }
     }
 }

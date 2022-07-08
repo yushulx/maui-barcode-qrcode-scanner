@@ -5,7 +5,7 @@ namespace BarcodeQrScanner;
 public partial class MainPage : ContentPage
 {
     string PhotoPath = "";
-    IBarcodeQRCodeService _barcodeQRCodeService;
+    BarcodeQRCodeService _barcodeQRCodeService;
 
     public MainPage()
 	{
@@ -56,15 +56,12 @@ public partial class MainPage : ContentPage
 
     private async void InitService()
     {
-        _barcodeQRCodeService = DependencyService.Get<IBarcodeQRCodeService>();
         await Task.Run(() =>
         {
+            _barcodeQRCodeService = new BarcodeQRCodeService();
             try
             {
-                if (_barcodeQRCodeService != null)
-                {
-                    _barcodeQRCodeService.InitSDK("DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ==");
-                }
+                _barcodeQRCodeService.InitSDK("DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ==");
             }
             catch (Exception ex)
             {

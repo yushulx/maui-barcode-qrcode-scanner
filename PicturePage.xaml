@@ -5,16 +5,19 @@
              x:Class="BarcodeQrScanner.PicturePage"
              Title="PicturePage">
     <ContentPage.Content>
-        <StackLayout>
+        <Grid>
+            
+            <skia:SKCanvasView x:Name="canvasView"
+                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                           PaintSurface="OnCanvasViewPaintSurface" />
             <Label FontSize="18"
                 FontAttributes="Bold"
                 x:Name="ResultLabel"
                    Text="Results"
-                HorizontalOptions="Start"/>
-            <skia:SKCanvasView x:Name="canvasView"
-                           WidthRequest="640" HeightRequest="640"
-                           PaintSurface="OnCanvasViewPaintSurface" />
+                   TextColor="Red"
+                HorizontalOptions="Center"
+               VerticalOptions="Center"/>
 
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
