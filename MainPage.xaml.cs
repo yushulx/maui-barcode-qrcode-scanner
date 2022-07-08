@@ -10,7 +10,8 @@ public partial class MainPage : ContentPage
     public MainPage()
 	{
 		InitializeComponent();
-	}
+        InitService();
+    }
 
     async void OnTakePhotoButtonClicked(object sender, EventArgs e)
     {
@@ -50,7 +51,28 @@ public partial class MainPage : ContentPage
 
         PhotoPath = newFile;
 
-        await Navigation.PushAsync(new PicturePage());
+        await Navigation.PushAsync(new PicturePage(PhotoPath, _barcodeQRCodeService));
+    }
+
+    private async void InitService()
+    {
+        _barcodeQRCodeService = DependencyService.Get<IBarcodeQRCodeService>();
+        await Task.Run(() =>
+        {
+            try
+            {
+                if (_barcodeQRCodeService != null)
+                {
+                    _barcodeQRCodeService.InitSDK("DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ==");
+                }
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Error", ex.Message, "OK");
+            }
+
+            return Task.CompletedTask;
+        });
     }
 
     async void OnTakeVideoButtonClicked(object sender, EventArgs e)
