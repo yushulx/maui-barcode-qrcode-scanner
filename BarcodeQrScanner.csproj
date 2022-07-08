@@ -48,4 +48,14 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-android'">
+	  <PackageReference Include="Xamarin.Dynamsoft.Barcode.Android">
+	    <Version>9.2.10</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="SkiaSharp.Views" Version="2.88.0" />
+	</ItemGroup>
+
 </Project>
