@@ -30,10 +30,10 @@ namespace BarcodeQrScanner.Services
             try
             {
                 PublicRuntimeSettings settings = reader.RuntimeSettings;
-                settings.ExpectedBarcodesCount = 0;
+                settings.ExpectedBarcodesCount = 512;
                 reader.UpdateRuntimeSettings(settings);
                 TextResult[] results = reader.DecodeFile(filePath);
-                if (results != null)
+                if (results != null && results.Length > 0)
                 {
                     output = new BarcodeQrData[results.Length];
                     int index = 0;
@@ -58,6 +58,7 @@ namespace BarcodeQrScanner.Services
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
             }
 
             return output;
