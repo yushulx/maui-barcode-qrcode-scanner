@@ -74,7 +74,23 @@ public partial class MainPage : ContentPage
 
     async void OnTakeVideoButtonClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new CameraPage());
+        var status = await Permissions.CheckStatusAsync<Permissions.Camera>();
+        if (status == PermissionStatus.Granted)
+        {
+            await Navigation.PushAsync(new CameraPage());
+        }
+        else
+        {
+            status = await Permissions.RequestAsync<Permissions.Camera>();
+            if (status == PermissionStatus.Granted)
+            {
+                await Navigation.PushAsync(new CameraPage());
+            }
+            else
+            {
+                await DisplayAlert("Permission needed", "I will need Camera permission for this action", "Ok");
+            }
+        }
     }
 }
 

@@ -55,6 +55,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Platforms\Android\Resources\layout\CameraLayout.axml" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0" />
 	</ItemGroup>
 

@@ -15,7 +15,16 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+			}).UseMauiCompatibility()
+            .ConfigureMauiHandlers((handlers) => {
+#if ANDROID
+                handlers.AddCompatibilityRenderer(typeof(CameraPreview), typeof(BarcodeQrScanner.Platforms.Android.CameraPreviewRenderer));
+#endif
+
+#if IOS
+                        handlers.AddCompatibilityRenderer(typeof(CameraPreview), typeof(CameraPreviewRenderer));
+#endif
+            });
 
 
         return builder.Build();
