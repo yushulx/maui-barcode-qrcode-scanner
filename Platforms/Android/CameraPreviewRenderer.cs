@@ -14,12 +14,7 @@ using Microsoft.Maui.Controls.Compatibility.Platform.Android.FastRenderers;
 using Microsoft.Maui.Controls.Platform;
 using Microsoft.Maui.Platform;
 using SkiaSharp;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Camera = Android.Hardware.Camera;
 using View = Android.Views.View;
 

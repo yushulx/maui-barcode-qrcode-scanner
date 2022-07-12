@@ -22,7 +22,7 @@ public static class MauiProgram
 #endif
 
 #if IOS
-                        handlers.AddCompatibilityRenderer(typeof(CameraPreview), typeof(CameraPreviewRenderer));
+                        handlers.AddCompatibilityRenderer(typeof(CameraPreview), typeof(BarcodeQrScanner.Platforms.iOS.CameraPreviewRenderer));
 #endif
             });
 
