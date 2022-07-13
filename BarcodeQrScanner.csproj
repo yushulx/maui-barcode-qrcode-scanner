@@ -70,4 +70,16 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<!--<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
+	  <PackageReference Include="iOSDBR">
+	    <Version>1.0.9</Version>
+	  </PackageReference>
+	</ItemGroup>-->
+
+	<!--<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
+	  <PackageReference Include="DBRiOS">
+	    <Version>1.0.3</Version>
+	  </PackageReference>
+	</ItemGroup>-->
+
 </Project>

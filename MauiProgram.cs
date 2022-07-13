@@ -17,16 +17,18 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			}).UseMauiCompatibility()
             .ConfigureMauiHandlers((handlers) => {
+                
 #if ANDROID
                 handlers.AddCompatibilityRenderer(typeof(CameraPreview), typeof(BarcodeQrScanner.Platforms.Android.CameraPreviewRenderer));
 #endif
 
 #if IOS
-                        handlers.AddCompatibilityRenderer(typeof(CameraPreview), typeof(BarcodeQrScanner.Platforms.iOS.CameraPreviewRenderer));
+//handlers.AddHandler(typeof(CameraPreview), typeof(BarcodeQrScanner.Platforms.iOS.CameraPreviewRenderer));
+				                        handlers.AddHandler(typeof(CameraPreview), typeof(BarcodeQrScanner.Platforms.iOS.CameraPreviewRenderer));
 #endif
-            });
+			});
 
 
-        return builder.Build();
+		return builder.Build();
 	}
 }

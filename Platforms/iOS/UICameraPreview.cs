@@ -3,7 +3,7 @@ using CoreFoundation;
 using CoreVideo;
 using Foundation;
 using UIKit;
-using DBRiOS;
+//using DBRiOS;
 
 namespace BarcodeQrScanner.Platforms.iOS
 {
@@ -12,7 +12,7 @@ namespace BarcodeQrScanner.Platforms.iOS
         AVCaptureVideoPreviewLayer previewLayer;
         CameraOptions cameraOptions;
         private CaptureOutput captureOutput;
-        DynamsoftBarcodeReader reader = new DynamsoftBarcodeReader();
+        //DynamsoftBarcodeReader reader = new DynamsoftBarcodeReader();
 
         public event EventHandler<EventArgs> Tapped;
         CameraPreview cameraPreview;
@@ -60,8 +60,8 @@ namespace BarcodeQrScanner.Platforms.iOS
                 Frame = Bounds,
                 VideoGravity = AVLayerVideoGravity.ResizeAspectFill
             };
-
-            var videoDevices = AVCaptureDevice.DevicesWithMediaType(AVMediaTypes.Video.ToString());
+            AVCaptureDevice[] videoDevices = AVCaptureDevice.Devices;
+            //var videoDevices = AVCaptureDevice.DevicesWithMediaType(AVMediaTypes.Video.ToString()); // return null
             var cameraPosition = (cameraOptions == CameraOptions.Front) ? AVCaptureDevicePosition.Front : AVCaptureDevicePosition.Back;
             var device = videoDevices.FirstOrDefault(d => d.Position == cameraPosition);
 
@@ -72,9 +72,9 @@ namespace BarcodeQrScanner.Platforms.iOS
 
             NSError error;
 
-            iPublicRuntimeSettings settings = reader.GetRuntimeSettings(out error);
-            settings.ExpectedBarcodesCount = (cameraPreview.ScanMode == ScanOptions.Single) ? 1 : 512;
-            reader.UpdateRuntimeSettings(settings, out error);
+            //iPublicRuntimeSettings settings = reader.GetRuntimeSettings(out error);
+            //settings.ExpectedBarcodesCount = (cameraPreview.ScanMode == ScanOptions.Single) ? 1 : 512;
+            //reader.UpdateRuntimeSettings(settings, out error);
 
             var input = new AVCaptureDeviceInput(device, out error);
             CaptureSession.AddInput(input);
@@ -85,7 +85,7 @@ namespace BarcodeQrScanner.Platforms.iOS
             if (CaptureSession.CanAddOutput(videoDataOutput))
             {
                 CaptureSession.AddOutput(videoDataOutput);
-                captureOutput.reader = reader;
+                //captureOutput.reader = reader;
                 captureOutput.update = UpdateResults;
 
                 DispatchQueue queue = new DispatchQueue("camera");
