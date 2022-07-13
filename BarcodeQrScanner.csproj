@@ -70,16 +70,24 @@
 	  </MauiXaml>
 	</ItemGroup>
 
-	<!--<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
-	  <PackageReference Include="iOSDBR">
-	    <Version>1.0.9</Version>
+  <!--<PropertyGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchI18n></MtouchI18n>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchExtraArgs>registrar:static</MtouchExtraArgs>
+  </PropertyGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
+	  <PackageReference Include="iOSBinding1">
+	    <Version>1.0.12</Version>
 	  </PackageReference>
 	</ItemGroup>-->
 
-	<!--<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
-	  <PackageReference Include="DBRiOS">
-	    <Version>1.0.3</Version>
-	  </PackageReference>
-	</ItemGroup>-->
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadWrongLinkerErrorInfoBarBarcodeQrScannerHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>
