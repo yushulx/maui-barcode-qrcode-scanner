@@ -17,7 +17,11 @@ public partial class MainPage : ContentPage
     {
         try
         {
+#if ANDROID || IOS
+            var photo = await MediaPicker.CapturePhotoAsync();
+#else
             var photo = await FilePicker.PickAsync(PickOptions.Images);
+#endif
             await LoadPhotoAsync(photo);
             Console.WriteLine($"CapturePhotoAsync COMPLETED: {PhotoPath}");
         }
