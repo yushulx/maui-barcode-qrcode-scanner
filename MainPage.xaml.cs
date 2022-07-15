@@ -17,11 +17,17 @@ public partial class MainPage : ContentPage
     {
         try
         {
-#if ANDROID || IOS
-            var photo = await MediaPicker.CapturePhotoAsync();
-#else
-            var photo = await FilePicker.PickAsync(PickOptions.Images);
-#endif
+
+            FileResult photo = null;
+            if (DeviceInfo.Current.Platform == DevicePlatform.WinUI || DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
+            {
+                photo = await FilePicker.PickAsync();
+            }
+            else if (DeviceInfo.Current.Platform == DevicePlatform.Android || DeviceInfo.Current.Platform == DevicePlatform.iOS)
+            {
+                photo = await MediaPicker.CapturePhotoAsync();
+            }
+
             await LoadPhotoAsync(photo);
             Console.WriteLine($"CapturePhotoAsync COMPLETED: {PhotoPath}");
         }
