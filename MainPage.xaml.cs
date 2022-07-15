@@ -17,7 +17,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
-            var photo = await MediaPicker.CapturePhotoAsync();
+            var photo = await FilePicker.PickAsync(PickOptions.Images);
             await LoadPhotoAsync(photo);
             Console.WriteLine($"CapturePhotoAsync COMPLETED: {PhotoPath}");
         }
