@@ -78,6 +78,9 @@
 	  <MauiXaml Update="CameraPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="DesktopCameraPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="PicturePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

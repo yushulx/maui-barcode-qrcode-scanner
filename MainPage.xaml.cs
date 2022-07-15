@@ -84,7 +84,13 @@ public partial class MainPage : ContentPage
 
     async void OnTakeVideoButtonClicked(object sender, EventArgs e)
     {
-        var status = await Permissions.CheckStatusAsync<Permissions.Camera>();
+        if (DeviceInfo.Current.Platform == DevicePlatform.WinUI || DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
+        {
+            await Navigation.PushAsync(new DesktopCameraPage());
+            return;
+        }
+
+            var status = await Permissions.CheckStatusAsync<Permissions.Camera>();
         if (status == PermissionStatus.Granted)
         {
             await Navigation.PushAsync(new CameraPage());
