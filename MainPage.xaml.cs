@@ -17,7 +17,17 @@ public partial class MainPage : ContentPage
     {
         try
         {
-            var photo = await MediaPicker.CapturePhotoAsync();
+
+            FileResult photo = null;
+            if (DeviceInfo.Current.Platform == DevicePlatform.WinUI || DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
+            {
+                photo = await FilePicker.PickAsync();
+            }
+            else if (DeviceInfo.Current.Platform == DevicePlatform.Android || DeviceInfo.Current.Platform == DevicePlatform.iOS)
+            {
+                photo = await MediaPicker.CapturePhotoAsync();
+            }
+
             await LoadPhotoAsync(photo);
             Console.WriteLine($"CapturePhotoAsync COMPLETED: {PhotoPath}");
         }
@@ -74,7 +84,13 @@ public partial class MainPage : ContentPage
 
     async void OnTakeVideoButtonClicked(object sender, EventArgs e)
     {
-        var status = await Permissions.CheckStatusAsync<Permissions.Camera>();
+        if (DeviceInfo.Current.Platform == DevicePlatform.WinUI || DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
+        {
+            await Navigation.PushAsync(new DesktopCameraPage());
+            return;
+        }
+
+            var status = await Permissions.CheckStatusAsync<Permissions.Camera>();
         if (status == PermissionStatus.Granted)
         {
             await Navigation.PushAsync(new CameraPage());

@@ -57,19 +57,28 @@ public partial class PicturePage : ContentPage
 
         var imageCanvas = new SKCanvas(bitmap);
 
+        float textSize = 18;
+        float StrokeWidth = 2;
+
+        if (DeviceInfo.Current.Platform == DevicePlatform.Android || DeviceInfo.Current.Platform == DevicePlatform.iOS)
+        {
+            textSize = (float)(18 * DeviceDisplay.MainDisplayInfo.Density);
+            StrokeWidth = 4;
+        }
+
         SKPaint skPaint = new SKPaint
         {
             Style = SKPaintStyle.Stroke,
             Color = SKColors.Blue,
-            StrokeWidth = 10,
+            StrokeWidth = StrokeWidth,
         };
 
         SKPaint textPaint = new SKPaint
         {
             Style = SKPaintStyle.Stroke,
             Color = SKColors.Red,
-            TextSize = (float)(18 * DeviceDisplay.MainDisplayInfo.Density),
-            StrokeWidth = 4,
+            TextSize = textSize,
+            StrokeWidth = StrokeWidth,
         };
 
         if (isDataReady)
@@ -79,6 +88,10 @@ public partial class PicturePage : ContentPage
                 ResultLabel.Text = "";
                 foreach (BarcodeQrData barcodeQrData in data)
                 {
+                    if (DeviceInfo.Current.Platform == DevicePlatform.WinUI || DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
+                    {
+                        ResultLabel.Text += barcodeQrData.text + "\n";
+                    }
                     imageCanvas.DrawText(barcodeQrData.text, barcodeQrData.points[0], textPaint);
                     imageCanvas.DrawLine(barcodeQrData.points[0], barcodeQrData.points[1], skPaint);
                     imageCanvas.DrawLine(barcodeQrData.points[1], barcodeQrData.points[2], skPaint);
