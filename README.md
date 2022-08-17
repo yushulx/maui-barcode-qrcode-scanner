@@ -1,6 +1,6 @@
 # .NET MAUI Barcode QR Code Scanner
 
-The .NET MAUI project is ported from [Xamarin.Forms barcode QR code scanner](https://github.com/yushulx/xamarin-forms-barcode-qrcode-scanner). The code can only work for Android. **Since the Dynamsoft Xamarin Barcode SDK is incompatible with net6.0-ios, the barcode QR code scanning function is disabled in iOS app**.
+The .NET MAUI project is ported from [Xamarin.Forms barcode QR code scanner](https://github.com/yushulx/xamarin-forms-barcode-qrcode-scanner). 
 
 ## Usage
 1. Import the project to `Visual Studio 2022 Preview`, which supports .NET MAUI.
