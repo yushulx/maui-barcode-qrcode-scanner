@@ -38,9 +38,9 @@ public partial class PicturePage : ContentPage
         {
             data = _barcodeQRCodeService.DecodeFile(path);
             isDataReady = true;
-            canvasView.InvalidateSurface();
             return Task.CompletedTask;
         });
+        canvasView.InvalidateSurface();
     }
 
     // https://docs.microsoft.com/en-us/dotnet/api/skiasharp.views.maui.controls.skcanvasview?view=skiasharp-views-maui-2.88
