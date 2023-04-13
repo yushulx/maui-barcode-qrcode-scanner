@@ -1,3 +1,7 @@
+The project has been moved to https://github.com/yushulx/dotnet-barcode-qr-code-sdk/tree/main/example/maui. 
+
+-----------------------------------------------------------------------------------------------------------------
+
 # .NET MAUI Barcode QR Code Scanner
 
 The .NET MAUI project is ported from [Xamarin.Forms barcode QR code scanner](https://github.com/yushulx/xamarin-forms-barcode-qrcode-scanner). 
