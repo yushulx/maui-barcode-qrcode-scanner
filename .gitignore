@@ -2,3 +2,8 @@
 /.vs
 /bin
 /*.user
+\<AndroidSdkPath\>
+\<JavaSdkPath\>
+/BarcodeQrScanner/obj
+/BarcodeQrScanner/bin
+.DS_Store
