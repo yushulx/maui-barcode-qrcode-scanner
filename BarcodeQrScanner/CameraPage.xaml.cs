@@ -8,8 +8,10 @@ namespace BarcodeQrScanner;
 
 public partial class CameraPage : ContentPage, ICapturedResultReceiver, ICompletionListener
 {
-    public CameraEnhancer? enhancer = null;
-    CaptureVisionRouter router;
+    public static CameraEnhancer? enhancer = null;
+    private CaptureVisionRouter router;
+    private float previewWidth = 0;
+    private float previewHeight = 0;
 
     public CameraPage()
     {
@@ -25,7 +27,7 @@ public partial class CameraPage : ContentPage, ICapturedResultReceiver, IComplet
         base.OnHandlerChanged();
         if (this.Handler != null && enhancer != null)
         {
-            enhancer.SetCameraView(camera);
+            enhancer.SetCameraView(CameraPreview);
             enhancer.Open();
         }
     }
@@ -44,26 +46,32 @@ public partial class CameraPage : ContentPage, ICapturedResultReceiver, IComplet
         router?.StopCapturing();
     }
 
+    public void OnCapturedResultReceived(CapturedResult result)
+    {
+        var drawable = new ImageWithOverlayDrawable(null, previewWidth, previewHeight, false);
+
+        // Set drawable to GraphicsView
+        OverlayGraphicsView.Drawable = drawable;
+        OverlayGraphicsView.Invalidate();
+    }
+
     public void OnDecodedBarcodesReceived(DecodedBarcodesResult result)
     {
-        if (result != null && result.Items != null && result.Items.Count > 0)
+        if (previewWidth == 0 && previewHeight == 0)
         {
-            // MainThread.BeginInvokeOnMainThread(() =>
-            // {
-            //     router?.StopCapturing();
-            //     enhancer?.ClearBuffer();
-            // });
-            var message = "";
-            foreach (var item in result.Items)
-            {
-                message += "\nFormat: " + item.FormatString + "\nText: " + item.Text + "\n";
-            }
-            // MainThread.BeginInvokeOnMainThread(async () =>
-            // {
-            //     await DisplayAlert("Results", message, "OK");
-            //     router?.StartCapturing(EnumPresetTemplate.PT_READ_BARCODES, this);
-            // });
+            IntermediateResultManager manager = router.GetIntermediateResultManager();
+            ImageData data = manager.GetOriginalImage(result.OriginalImageHashId);
+            
+            // Create a drawable with the barcode results
+            previewWidth = (float)data.Width;
+            previewHeight = (float)data.Height;
         }
+
+        var drawable = new ImageWithOverlayDrawable(result, previewWidth, previewHeight, false);
+
+        // Set drawable to GraphicsView
+        OverlayGraphicsView.Drawable = drawable;
+        OverlayGraphicsView.Invalidate();
     }
 
     public void OnSuccess()
@@ -74,5 +82,12 @@ public partial class CameraPage : ContentPage, ICapturedResultReceiver, IComplet
     public void OnFailure(int errorCode, string errorMessage)
     {
         Debug.WriteLine(errorMessage);
+    }
+
+    private void OnImageSizeChanged(object sender, EventArgs e)
+    {
+        // Adjust the GraphicsView size to match the Image size
+        OverlayGraphicsView.WidthRequest = CameraPreview.Width;
+        OverlayGraphicsView.HeightRequest = CameraPreview.Height;
     }
 }

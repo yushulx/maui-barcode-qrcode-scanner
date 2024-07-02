@@ -2,6 +2,7 @@
 using Dynamsoft.CameraEnhancer.Maui;
 using Dynamsoft.CameraEnhancer.Maui.Handlers;
 using CommunityToolkit.Maui;
+using Microsoft.Maui.LifecycleEvents;
 
 namespace BarcodeQrScanner;
 
@@ -16,7 +17,23 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			}).ConfigureMauiHandlers(handlers =>
+			})
+			.ConfigureLifecycleEvents(events =>
+                            {
+#if ANDROID
+                                events.AddAndroid(android => android
+                                    .OnResume((activity) =>
+                                    {
+                                       CameraPage.enhancer?.Open();
+
+                                    })
+                                    .OnStop((activity) =>
+                                    {
+
+                                    }));
+#endif
+                            })
+							.ConfigureMauiHandlers(handlers =>
             {
                 handlers.AddHandler(typeof(CameraView), typeof(CameraViewHandler));
             });

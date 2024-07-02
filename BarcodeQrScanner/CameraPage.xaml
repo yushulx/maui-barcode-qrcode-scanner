@@ -4,10 +4,9 @@
              xmlns:controls="clr-namespace:Dynamsoft.CameraEnhancer.Maui;assembly=Dynamsoft.CaptureVisionRouter.Maui"
              x:Class="BarcodeQrScanner.CameraPage"
              Title="Barcode Scanner">
-    <Grid>
-        <controls:CameraView x:Name="camera"
-                             AbsoluteLayout.LayoutBounds="0,0,1,1"
-                             AbsoluteLayout.LayoutFlags="All"/>
-        <GraphicsView x:Name="OverlayGraphicsView" />
+    <Grid Margin="0">
+        <controls:CameraView x:Name="CameraPreview"
+                              VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" SizeChanged="OnImageSizeChanged"/>
+        <GraphicsView x:Name="OverlayGraphicsView"/>
     </Grid>
 </ContentPage>
