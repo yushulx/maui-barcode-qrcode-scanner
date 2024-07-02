@@ -6,7 +6,7 @@
              Title="Barcode Scanner">
     <Grid Margin="0">
         <controls:CameraView x:Name="CameraPreview"
-                              VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" SizeChanged="OnImageSizeChanged"/>
+                              SizeChanged="OnImageSizeChanged"/>
         <GraphicsView x:Name="OverlayGraphicsView"/>
     </Grid>
 </ContentPage>

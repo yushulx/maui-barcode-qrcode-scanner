@@ -48,11 +48,14 @@ public partial class CameraPage : ContentPage, ICapturedResultReceiver, IComplet
 
     public void OnCapturedResultReceived(CapturedResult result)
     {
-        var drawable = new ImageWithOverlayDrawable(null, previewWidth, previewHeight, false);
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            var drawable = new ImageWithOverlayDrawable(null, previewWidth, previewHeight, false);
 
-        // Set drawable to GraphicsView
-        OverlayGraphicsView.Drawable = drawable;
-        OverlayGraphicsView.Invalidate();
+            // Set drawable to GraphicsView
+            OverlayGraphicsView.Drawable = drawable;
+            OverlayGraphicsView.Invalidate();
+        });
     }
 
     public void OnDecodedBarcodesReceived(DecodedBarcodesResult result)
@@ -67,11 +70,14 @@ public partial class CameraPage : ContentPage, ICapturedResultReceiver, IComplet
             previewHeight = (float)data.Height;
         }
 
-        var drawable = new ImageWithOverlayDrawable(result, previewWidth, previewHeight, false);
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            var drawable = new ImageWithOverlayDrawable(result, previewWidth, previewHeight, false);
 
-        // Set drawable to GraphicsView
-        OverlayGraphicsView.Drawable = drawable;
-        OverlayGraphicsView.Invalidate();
+            // Set drawable to GraphicsView
+            OverlayGraphicsView.Drawable = drawable;
+            OverlayGraphicsView.Invalidate();
+        });
     }
 
     public void OnSuccess()
