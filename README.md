@@ -10,6 +10,9 @@ The .NET MAUI barcode Qr code scanner is developed with [Dynamsoft Barcode Reade
     LicenseManager.InitLicense("LICENSE-KEY", this);
     ```
 3. Build and run the project. 
- 
+
+     https://github.com/yushulx/maui-barcode-qrcode-scanner/assets/2202306/b76aae4d-cc59-4370-a2ba-df8d46532713
+
+
 
 
