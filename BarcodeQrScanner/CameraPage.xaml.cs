@@ -3,12 +3,13 @@ using Dynamsoft.CaptureVisionRouter.Maui;
 using Dynamsoft.BarcodeReader.Maui;
 using Dynamsoft.CameraEnhancer.Maui;
 using System.Diagnostics;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace BarcodeQrScanner;
 
 public partial class CameraPage : ContentPage, ICapturedResultReceiver, ICompletionListener
 {
-    public static CameraEnhancer? enhancer = null;
+    private CameraEnhancer? enhancer = null;
     private CaptureVisionRouter router;
     private float previewWidth = 0;
     private float previewHeight = 0;
@@ -20,6 +21,21 @@ public partial class CameraPage : ContentPage, ICapturedResultReceiver, IComplet
         router = new CaptureVisionRouter();
         router.SetInput(enhancer);
         router.AddResultReceiver(this);
+
+        WeakReferenceMessenger.Default.Register<LifecycleEventMessage>(this, (r, message) =>
+        {
+            if (message.EventName == "Resume")
+            {
+                if (this.Handler != null && enhancer != null)
+                {
+                    enhancer.Open();
+                }
+            }
+            else if (message.EventName == "Stop")
+            {
+                enhancer?.Close();
+            }
+        });
     }
 
     protected override void OnHandlerChanged()

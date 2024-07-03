@@ -3,6 +3,7 @@ using Dynamsoft.CameraEnhancer.Maui;
 using Dynamsoft.CameraEnhancer.Maui.Handlers;
 using CommunityToolkit.Maui;
 using Microsoft.Maui.LifecycleEvents;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace BarcodeQrScanner;
 
@@ -24,12 +25,11 @@ public static class MauiProgram
                                 events.AddAndroid(android => android
                                     .OnResume((activity) =>
                                     {
-                                       CameraPage.enhancer?.Open();
-
-                                    })
+										NotifyPage("Resume");
+									})
                                     .OnStop((activity) =>
                                     {
-
+										NotifyPage("Stop");
                                     }));
 #endif
                             })
@@ -43,5 +43,10 @@ public static class MauiProgram
 #endif
 
 		return builder.Build();
+	}
+
+	private static void NotifyPage(string eventName)
+	{
+		WeakReferenceMessenger.Default.Send(new LifecycleEventMessage(eventName));
 	}
 }

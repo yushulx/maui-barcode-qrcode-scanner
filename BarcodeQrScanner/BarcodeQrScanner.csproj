@@ -63,6 +63,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Dynamsoft.BarcodeReaderBundle.Maui" Version="10.2.1100" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
