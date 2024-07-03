@@ -13,6 +13,7 @@ The .NET MAUI barcode Qr code scanner is developed with [Dynamsoft Barcode Reade
 
      https://github.com/yushulx/maui-barcode-qrcode-scanner/assets/2202306/b76aae4d-cc59-4370-a2ba-df8d46532713
 
-
+## Blog
+[Building .NET MAUI Barcode Scanner with Visual Studio Code on macOS](https://www.dynamsoft.com/codepool/dotnet-maui-barcode-sdk-tutorial.html)
 
 
