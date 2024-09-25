@@ -4,7 +4,7 @@ The .NET MAUI barcode Qr code scanner is developed with [Dynamsoft Barcode Reade
 
 ## Usage
 1. Import the project to `Visual Studio 2022` or `Visual Studio Code`.
-2. Obtain a [30-day free trial license](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr) and update the following code in `MainPage.xaml.cs`:
+2. Obtain a [30-day free trial license](https://www.dynamsoft.com/customer/license/trialLicense/?product=dcv&package=cross-platform) and update the following code in `MainPage.xaml.cs`:
 
     ```csharp
     LicenseManager.InitLicense("LICENSE-KEY", this);
