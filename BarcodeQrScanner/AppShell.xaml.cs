@@ -1,9 +1,10 @@
-﻿namespace BarcodeQrScanner;
-
-public partial class AppShell : Shell
+﻿namespace BarcodeQrScanner
 {
-	public AppShell()
-	{
-		InitializeComponent();
-	}
+    public partial class AppShell : Shell
+    {
+        public AppShell()
+        {
+            InitializeComponent();
+        }
+    }
 }
